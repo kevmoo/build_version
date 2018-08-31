@@ -23,9 +23,12 @@ class _VersionBuilder implements Builder {
 
     var pubspec = Pubspec.parse(content, sourceUrl: assetId.uri);
 
+    if (pubspec.version == null) {
+      throw StateError('pubspec.yaml does not have a version defined.');
+    }
+
     await buildStep.writeAsString(
-        AssetId(buildStep.inputId.package, 'lib/src/version.dart'),
-        '''
+        AssetId(buildStep.inputId.package, 'lib/src/version.dart'), '''
 // Generated code. Do not modify.
 const version = '${pubspec.version}';
 ''');
