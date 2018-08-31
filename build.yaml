@@ -1,0 +1,16 @@
+# Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
+targets:
+  $default:
+    builders:
+      build_version:
+        enabled: true
+        #generate_for:
+        #  - $lib$
+
+builders:
+  build_version:
+    import: "package:build_version/builder.dart"
+    builder_factories: ["buildVersion"]
+    build_extensions: {"$lib$": ["version.dart"]}
+    build_to: source
+    auto_apply: none
