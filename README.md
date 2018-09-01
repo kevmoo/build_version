@@ -1,3 +1,6 @@
+![Pub](https://img.shields.io/pub/v/build_version.svg)
+[![Build Status](https://travis-ci.org/kevmoo/build_version.svg?branch=master)](https://travis-ci.org/kevmoo/build_version)
+
 Include the version of your package in our source code.
 
 1. Add `build_version` to `pubspec.yaml`. Also make sure there is a `version`
