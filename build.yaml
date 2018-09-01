@@ -1,11 +1,10 @@
 # Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
+
 targets:
   $default:
     builders:
       build_version:
         enabled: true
-        #generate_for:
-        #  - $lib$
 
 builders:
   build_version:
