@@ -30,9 +30,9 @@ Include the version of your package in our source code.
     > pub run build_runner build
     ```
 
-    You should see a file created at `lib/src/version.dart`
+    `lib/src/version.dart` will be generated with content:
 
     ```dart
     // Generated code. Do not modify.
-    const version = '1.2.3';
+    const packageVersion = '1.2.3';
     ```
