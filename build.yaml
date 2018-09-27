@@ -1,5 +1,4 @@
 # Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
-
 targets:
   $default:
     builders:
@@ -12,4 +11,4 @@ builders:
     builder_factories: ["buildVersion"]
     build_extensions: {"$lib$": ["version.dart"]}
     build_to: source
-    auto_apply: none
+    auto_apply: dependents
