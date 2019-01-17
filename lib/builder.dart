@@ -15,8 +15,8 @@ import 'package:pubspec_parse/pubspec_parse.dart';
 Builder buildVersion([BuilderOptions options]) => _VersionBuilder();
 
 // The top level keys supported for the `options` config for the [_VersionBuilder].
-const String _fieldName = 'fieldName';
-const String _targetPath = 'targetPath';
+const String _fieldName = 'field_name';
+const String _targetPath = 'target_path';
 
 class _VersionBuilder implements Builder {
   _VersionBuilder([BuilderOptions options])
