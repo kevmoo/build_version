@@ -14,7 +14,22 @@ import 'package:pubspec_parse/pubspec_parse.dart';
 
 Builder buildVersion([BuilderOptions options]) => _VersionBuilder();
 
+// The top level keys supported for the `options` config for the [_VersionBuilder].
+const String _fieldName = 'fieldName';
+const String _targetPath = 'targetPath';
+
 class _VersionBuilder implements Builder {
+  _VersionBuilder([BuilderOptions options])
+      : fieldName = options != null && options.config.containsKey(_fieldName)
+            ? options.config[_fieldName].toString()
+            : 'packageVersion',
+        targetPath = options != null && options.config.containsKey(_targetPath)
+            ? options.config[_targetPath].toString()
+            : 'src/version.dart';
+
+  final String fieldName;
+  final String targetPath;
+
   @override
   Future build(BuildStep buildStep) async {
     var assetId = AssetId(buildStep.inputId.package, 'pubspec.yaml');
@@ -28,14 +43,14 @@ class _VersionBuilder implements Builder {
     }
 
     await buildStep.writeAsString(
-        AssetId(buildStep.inputId.package, 'lib/src/version.dart'), '''
-// Generated code. Do not modify.
-const packageVersion = '${pubspec.version}';
+        AssetId(buildStep.inputId.package, 'lib/$targetPath'), '''
+/// Generated code. Do not modify.
+const String $fieldName = '${pubspec.version}';
 ''');
   }
 
   @override
-  final buildExtensions = const {
-    r'$lib$': ['src/version.dart']
-  };
+  Map<String, List<String>> get buildExtensions => {
+        r'$lib$': [targetPath]
+      };
 }
