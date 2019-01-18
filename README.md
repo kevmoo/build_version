@@ -23,6 +23,6 @@ Include the version of your package in our source code.
     `lib/src/version.dart` will be generated with content:
 
     ```dart
-    // Generated code. Do not modify.
-    const packageVersion = '1.2.3';
+    /// Generated code. Do not modify.
+    const String packageVersion = '1.2.3';
     ```
