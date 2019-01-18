@@ -12,7 +12,7 @@ import 'dart:async';
 import 'package:build/build.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 
-Builder buildVersion([BuilderOptions options]) => _VersionBuilder();
+Builder buildVersion([BuilderOptions options]) => _VersionBuilder(options);
 
 // The top level keys supported for the `options` config for the [_VersionBuilder].
 const String _fieldName = 'field_name';
