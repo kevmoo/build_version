@@ -17,11 +17,11 @@ Builder buildVersion([BuilderOptions options]) => _VersionBuilder();
 class _VersionBuilder implements Builder {
   @override
   Future build(BuildStep buildStep) async {
-    var assetId = AssetId(buildStep.inputId.package, 'pubspec.yaml');
+    final assetId = AssetId(buildStep.inputId.package, 'pubspec.yaml');
 
-    var content = await buildStep.readAsString(assetId);
+    final content = await buildStep.readAsString(assetId);
 
-    var pubspec = Pubspec.parse(content, sourceUrl: assetId.uri);
+    final pubspec = Pubspec.parse(content, sourceUrl: assetId.uri);
 
     if (pubspec.version == null) {
       throw StateError('pubspec.yaml does not have a version defined.');
