@@ -9,6 +9,6 @@ builders:
   build_version:
     import: "package:build_version/builder.dart"
     builder_factories: ["buildVersion"]
-    build_extensions: {"$lib$": ["version.dart"]}
+    build_extensions: {"$lib$": [".dart"]}
     build_to: source
     auto_apply: dependents

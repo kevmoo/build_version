@@ -26,3 +26,16 @@ Include the version of your package in our source code.
     // Generated code. Do not modify.
     const packageVersion = '1.2.3';
     ```
+
+3. To customize the name of the version constant and the version file location, 
+   add options to `build.yaml`.
+
+    ```yaml
+    targets:
+      $default:
+        builders:
+          build_version:
+            options:
+              field_name: 'myVersion'
+              target_path: 'src/my_version.dart'    
+    ```
