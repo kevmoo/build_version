@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:build_version/builder.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
@@ -33,6 +34,17 @@ void main() {
           'pkg|lib/src/version.dart': r'''
 // Generated code. Do not modify.
 const packageVersion = '1.0.0';
+'''
+        });
+  });
+  test('valid input with custom field', () async {
+    await testBuilder(
+        buildVersion(const BuilderOptions({'field_name': 'myVersion'})),
+        _createPackageStub({'name': 'pkg', 'version': '1.0.0'}),
+        outputs: {
+          'pkg|lib/src/version.dart': r'''
+// Generated code. Do not modify.
+const myVersion = '1.0.0';
 '''
         });
   });

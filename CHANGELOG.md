@@ -1,3 +1,8 @@
+## 2.1.0
+
+- Users can now customize the version constant name and the generated 
+  version file could be a part of an existing package library.
+
 ## 2.0.0
 
 - The builder now runs when `build_version` is a dependency. `build.yaml`
