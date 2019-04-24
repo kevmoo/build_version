@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Support the latest `package:build_config`.
+
 ## 2.0.0
 
 - The builder now runs when `build_version` is a dependency. `build.yaml`
