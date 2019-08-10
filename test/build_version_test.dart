@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:build_test/build_test.dart';
 import 'package:build_version/builder.dart';
-import 'package:pubspec_parse/pubspec_parse.dart';
+import 'package:checked_yaml/checked_yaml.dart';
 import 'package:test/test.dart';
 
 final _isParsedYamlException = const TypeMatcher<ParsedYamlException>();
