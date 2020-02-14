@@ -5,7 +5,7 @@ import 'package:build_version/builder.dart';
 import 'package:checked_yaml/checked_yaml.dart';
 import 'package:test/test.dart';
 
-final _isParsedYamlException = const TypeMatcher<ParsedYamlException>();
+const _isParsedYamlException = TypeMatcher<ParsedYamlException>();
 
 void main() {
   test('no name provided', () async {
