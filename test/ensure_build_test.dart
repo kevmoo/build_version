@@ -1,3 +1,4 @@
+// @dart=2.9
 @Tags(['presubmit-only'])
 
 import 'package:build_verify/build_verify.dart';
