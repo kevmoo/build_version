@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  # Run on PRs and pushes to the default branch.
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: "0 0 * * 0"
+
+env:
+  PUB_ENVIRONMENT: bot.github
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [dev]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v1.0
+        with:
+          sdk: ${{ matrix.sdk }}
+      - id: install
+        run: pub get
+      - run: dartfmt --set-exit-if-changed .
+        if: always() && steps.install.outcome == 'success'
+      - run: dartanalyzer --fatal-infos .
+        if: always() && steps.install.outcome == 'success'
+
+  test:
+    needs: analyze
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        sdk: [2.7.0, dev]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v1.0
+        with:
+          sdk: ${{ matrix.sdk }}
+      - run: pub get
+      - run: pub run test --run-skipped

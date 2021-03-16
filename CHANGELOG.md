@@ -1,7 +1,8 @@
-## 2.0.2-dev
+## 2.0.2
 
 - Require at least Dart SDK `2.7.0`.
 - Require `package:build` `1.0.0` or greater.
+- Support the latest `package:pubspec_parse`.
 
 ## 2.0.1
 
