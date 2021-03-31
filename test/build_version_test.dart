@@ -31,7 +31,7 @@ void main() {
         buildVersion(), _createPackageStub({'name': 'pkg', 'version': '1.0.0'}),
         outputs: {
           'pkg|lib/src/version.dart': r'''
-// Generated code. Do not modify.
+/// Generated code. Do not modify.
 const packageVersion = '1.0.0';
 '''
         });
