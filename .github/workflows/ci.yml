@@ -26,9 +26,9 @@ jobs:
           sdk: ${{ matrix.sdk }}
       - id: install
         run: pub get
-      - run: dartfmt --dry-run --set-exit-if-changed .
+      - run: dart format --set-exit-if-changed .
         if: always() && steps.install.outcome == 'success'
-      - run: dartanalyzer --fatal-infos .
+      - run: dart analyze --fatal-infos .
         if: always() && steps.install.outcome == 'success'
 
   test:
@@ -38,11 +38,11 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        sdk: [2.7.0, dev]
+        sdk: [2.12.0, dev]
     steps:
       - uses: actions/checkout@v2
       - uses: dart-lang/setup-dart@v1.0
         with:
           sdk: ${{ matrix.sdk }}
       - run: pub get
-      - run: pub run test --run-skipped
+      - run: dart test --run-skipped
