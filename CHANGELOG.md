@@ -1,3 +1,8 @@
+## 2.0.3
+
+- Support the latest `package:build_config`.
+- Require at least Dart SDK `2.12.0`.
+
 ## 2.0.2
 
 - Require at least Dart SDK `2.7.0`.
