@@ -29,7 +29,7 @@ class _VersionBuilder implements Builder {
 
     await buildStep.writeAsString(
         AssetId(buildStep.inputId.package, 'lib/src/version.dart'), '''
-// Generated code. Do not modify.
+/// Generated code. Do not modify.
 const packageVersion = '${pubspec.version}';
 ''');
   }
