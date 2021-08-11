@@ -15,7 +15,7 @@ import 'package:pubspec_parse/pubspec_parse.dart';
 const _defaultOutput = 'lib/src/version.dart';
 
 Builder buildVersion([BuilderOptions? options]) =>
-    _VersionBuilder((options?.config['output'] ?? _defaultOutput) as String);
+    _VersionBuilder((options?.config['output'] as String?) ?? _defaultOutput);
 
 class _VersionBuilder implements Builder {
   final String output;
