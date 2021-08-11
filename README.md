@@ -28,7 +28,7 @@ Include the version of your package in our source code.
 
 To change the path of the generated file, create a [`build.yaml`](build config)
 in the root of your package.
-My changing the `output` option of this builder, the path can be customized:
+By changing the `output` option of this builder, the path can be customized:
 
 ```yaml
 targets:
