@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Make the path of the generated output configurable
+
 ## 2.0.3
 
 - Support the latest `package:build_config`.
