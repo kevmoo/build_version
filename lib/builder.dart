@@ -12,9 +12,16 @@ import 'dart:async';
 import 'package:build/build.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 
-Builder buildVersion([BuilderOptions? options]) => _VersionBuilder();
+const _defaultOutput = 'lib/src/version.dart';
+
+Builder buildVersion([BuilderOptions? options]) =>
+    _VersionBuilder((options?.config['output'] ?? _defaultOutput) as String);
 
 class _VersionBuilder implements Builder {
+  final String output;
+
+  _VersionBuilder(this.output);
+
   @override
   Future build(BuildStep buildStep) async {
     final assetId = AssetId(buildStep.inputId.package, 'pubspec.yaml');
@@ -27,15 +34,14 @@ class _VersionBuilder implements Builder {
       throw StateError('pubspec.yaml does not have a version defined.');
     }
 
-    await buildStep.writeAsString(
-        AssetId(buildStep.inputId.package, 'lib/src/version.dart'), '''
+    await buildStep.writeAsString(buildStep.allowedOutputs.single, '''
 // Generated code. Do not modify.
 const packageVersion = '${pubspec.version}';
 ''');
   }
 
   @override
-  final buildExtensions = const {
-    r'$lib$': ['src/version.dart']
-  };
+  Map<String, List<String>> get buildExtensions => {
+        'pubspec.yaml': [output],
+      };
 }

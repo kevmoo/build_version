@@ -9,6 +9,9 @@ builders:
   build_version:
     import: "package:build_version/builder.dart"
     builder_factories: ["buildVersion"]
-    build_extensions: {"$lib$": ["src/version.dart"]}
+    build_extensions: {"pubspec.yaml": ["lib/src/version.dart"]}
+    defaults:
+      options:
+        output: "lib/src/version.dart"
     build_to: source
     auto_apply: dependents

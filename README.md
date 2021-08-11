@@ -16,7 +16,7 @@ Include the version of your package in our source code.
 2. Run a build.
 
     ```console
-    > pub run build_runner build
+    > dart pub run build_runner build
     ```
 
     `lib/src/version.dart` will be generated with content:
@@ -25,3 +25,18 @@ Include the version of your package in our source code.
     // Generated code. Do not modify.
     const packageVersion = '1.2.3';
     ```
+
+To change the path of the generated file, create a [`build.yaml`](build config)
+in the root of your package.
+My changing the `output` option of this builder, the path can be customized:
+
+```yaml
+targets:
+  $default:
+    builders:
+      build_version:
+        options:
+          output: lib/src/custom/path/to/version.dart
+```
+
+[build config]: https://pub.dev/packages/build_config
