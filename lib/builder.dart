@@ -26,6 +26,13 @@ class _VersionBuilder implements Builder {
   Future build(BuildStep buildStep) async {
     final assetId = AssetId(buildStep.inputId.package, 'pubspec.yaml');
 
+    if (assetId != buildStep.inputId) {
+      // Skip nested packages!
+      // Should be able to use `^pubspec.yaml` – but it no work
+      // See https://github.com/dart-lang/build/issues/3286
+      return;
+    }
+
     final content = await buildStep.readAsString(assetId);
 
     final pubspec = Pubspec.parse(content, sourceUrl: assetId.uri);

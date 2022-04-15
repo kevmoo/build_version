@@ -1,4 +1,7 @@
-## 2.1.1-dev
+## 2.1.1
+
+- Fix cas where builder would apply to any nested directories with a
+  `pubspec.yaml` file.
 
 ## 2.1.0
 
