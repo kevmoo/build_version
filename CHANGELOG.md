@@ -1,3 +1,7 @@
+## 2.1.2-dev
+
+- Require at least Dart SDK `2.18.0`.
+
 ## 2.1.1
 
 - Fix cas where builder would apply to any nested directories with a

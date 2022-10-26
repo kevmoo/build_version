@@ -23,7 +23,7 @@ class _VersionBuilder implements Builder {
   _VersionBuilder(this.output);
 
   @override
-  Future build(BuildStep buildStep) async {
+  Future<void> build(BuildStep buildStep) async {
     final assetId = AssetId(buildStep.inputId.package, 'pubspec.yaml');
 
     if (assetId != buildStep.inputId) {
