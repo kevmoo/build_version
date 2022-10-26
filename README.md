@@ -1,4 +1,6 @@
-[![Pub](https://img.shields.io/pub/v/build_version.svg)](https://pub.dev/packages/build_version)
+[![CI](https://github.com/kevmoo/build_version/workflows/CI/badge.svg?branch=master)](https://github.com/kevmoo/build_version/actions?query=workflow%3ACI+branch%3Amaster)
+[![Pub Package](https://img.shields.io/pub/v/build_version.svg)](https://pub.dev/packages/build_version)
+[![package publisher](https://img.shields.io/pub/publisher/build_version.svg)](https://pub.dev/packages/build_version/publisher)
 
 Include the version of your package in our source code.
 
