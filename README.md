@@ -28,7 +28,7 @@ Include the version of your package in our source code.
     const packageVersion = '1.2.3';
     ```
 
-To change the path of the generated file, create a [`build.yaml`](build config)
+To change the path of the generated file, create a [`build.yaml`](build_config)
 in the root of your package.
 By changing the `output` option of this builder, the path can be customized:
 
@@ -41,4 +41,4 @@ targets:
           output: lib/src/custom/path/to/version.dart
 ```
 
-[build config]: https://pub.dev/packages/build_config
+[build_config]: https://pub.dev/packages/build_config
