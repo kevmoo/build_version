@@ -1,6 +1,6 @@
-## 2.1.2-dev
+## 2.1.2-wip
 
-- Require at least Dart SDK `2.18.0`.
+- Require at least Dart SDK `3.0.0`.
 
 ## 2.1.1
 
