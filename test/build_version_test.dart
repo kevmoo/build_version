@@ -47,7 +47,7 @@ void main() {
         'pkg|lib/src/version.dart': r'''
 // Generated code. Do not modify.
 const packageVersion = '1.0.0';
-'''
+''',
       },
     );
   });
@@ -60,7 +60,7 @@ const packageVersion = '1.0.0';
         'pkg|bin/version.dart': r'''
 // Generated code. Do not modify.
 const packageVersion = '1.0.0';
-'''
+''',
       },
     );
   });
