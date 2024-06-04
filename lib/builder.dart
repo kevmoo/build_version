@@ -5,7 +5,7 @@
 ///
 /// See [package:build_runner](https://pub.dev/packages/build_runner)
 /// for more information.
-library builder;
+library;
 
 import 'dart:async';
 
