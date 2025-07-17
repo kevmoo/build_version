@@ -1,6 +1,6 @@
 name: build_version
 description: A builder for extracting a package version into code.
-version: 2.1.2
+version: 2.1.3-wip
 repository: https://github.com/kevmoo/build_version
 
 environment:
