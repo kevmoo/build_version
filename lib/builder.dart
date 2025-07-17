@@ -49,6 +49,6 @@ const packageVersion = '${pubspec.version}';
 
   @override
   Map<String, List<String>> get buildExtensions => {
-        'pubspec.yaml': [output],
-      };
+    'pubspec.yaml': [output],
+  };
 }
