@@ -11,10 +11,8 @@ const _isParsedYamlException = TypeMatcher<ParsedYamlException>();
 void main() {
   test('no name provided', () async {
     expect(
-      () => testBuilder(
-        buildVersion(),
-        _createPackageStub({'version': '1.0.0'}),
-      ),
+      () =>
+          testBuilder(buildVersion(), _createPackageStub({'version': '1.0.0'})),
       throwsA(_isParsedYamlException),
     );
   });
@@ -67,5 +65,5 @@ const packageVersion = '1.0.0';
 }
 
 Map<String, String> _createPackageStub(Map<String, dynamic> pubspecContent) => {
-      'pkg|pubspec.yaml': jsonEncode(pubspecContent),
-    };
+  'pkg|pubspec.yaml': jsonEncode(pubspecContent),
+};
