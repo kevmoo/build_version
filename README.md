@@ -1,4 +1,4 @@
-[![CI](https://github.com/kevmoo/build_version/workflows/CI/badge.svg?branch=master)](https://github.com/kevmoo/build_version/actions?query=workflow%3ACI+branch%3Amaster)
+[![CI](https://github.com/kevmoo/build_version/actions/workflows/ci.yml/badge.svg)](https://github.com/kevmoo/build_version/actions/workflows/ci.yml)
 [![Pub Package](https://img.shields.io/pub/v/build_version.svg)](https://pub.dev/packages/build_version)
 [![package publisher](https://img.shields.io/pub/publisher/build_version.svg)](https://pub.dev/packages/build_version/publisher)
 
