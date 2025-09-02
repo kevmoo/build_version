@@ -1,6 +1,7 @@
 ## 2.1.3
 
 - Support `build: ^4.0.0`.
+- Rename main entrypoint library to `package:build_version/build_version.dart`.
 
 ## 2.1.2
 
