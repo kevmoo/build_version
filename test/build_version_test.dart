@@ -3,38 +3,55 @@ import 'dart:convert';
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:build_version/builder.dart';
-import 'package:checked_yaml/checked_yaml.dart';
 import 'package:test/test.dart';
-
-const _isParsedYamlException = TypeMatcher<ParsedYamlException>();
 
 void main() {
   test('no name provided', () async {
+    final logs = <String>[];
+    final result = await testBuilder(
+      buildVersion(),
+      _createPackageStub({'version': '1.0.0'}),
+      onLog: (log) => logs.add(log.message),
+    );
+
+    expect(result.buildResult.failureType, isNotNull);
     expect(
-      () =>
-          testBuilder(buildVersion(), _createPackageStub({'version': '1.0.0'})),
-      throwsA(_isParsedYamlException),
+      logs,
+      contains(
+        allOf(contains('ParsedYamlException'), contains('Missing key "name')),
+      ),
     );
   });
   test('no version provided', () async {
+    final logs = <String>[];
+    final result = await testBuilder(
+      buildVersion(),
+      _createPackageStub({'name': 'pkg'}),
+      onLog: (log) => logs.add(log.message),
+    );
+
+    expect(result.buildResult.failureType, isNotNull);
     expect(
-      () => testBuilder(buildVersion(), _createPackageStub({'name': 'pkg'})),
-      throwsA(
-        const TypeMatcher<StateError>().having(
-          (se) => se.message,
-          'message',
-          'pubspec.yaml does not have a version defined.',
-        ),
+      logs,
+      contains(
+        allOf(contains('pubspec.yaml does not have a version defined.')),
       ),
     );
   });
   test('bad version provided', () async {
+    final logs = <String>[];
+    final result = await testBuilder(
+      buildVersion(),
+      _createPackageStub({'name': 'pkg', 'version': 'not a version'}),
+      onLog: (log) => logs.add(log.message),
+    );
+
+    expect(result.buildResult.failureType, isNotNull);
     expect(
-      () => testBuilder(
-        buildVersion(),
-        _createPackageStub({'name': 'pkg', 'version': 'not a version'}),
+      logs,
+      contains(
+        allOf(contains('Unsupported value for "version". Could not parse')),
       ),
-      throwsA(_isParsedYamlException),
     );
   });
   test('valid input', () async {
