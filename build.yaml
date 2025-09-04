@@ -7,7 +7,7 @@ targets:
 
 builders:
   build_version:
-    import: "package:build_version/build_version.dart"
+    import: "package:build_version/builder.dart"
     builder_factories: ["buildVersion"]
     build_extensions: {"pubspec.yaml": ["lib/src/version.dart"]}
     defaults:
