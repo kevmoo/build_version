@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
-import 'package:build_version/build_version.dart';
+import 'package:build_version/builder.dart';
 import 'package:test/test.dart';
 
 void main() {
