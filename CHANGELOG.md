@@ -1,3 +1,7 @@
+## 2.1.3
+
+- Support `build: ^4.0.0`.
+
 ## 2.1.2
 
 - Require `build: ^3.0.0`
