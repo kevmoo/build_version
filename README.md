@@ -40,4 +40,6 @@ targets:
       build_version:
         options:
           output: lib/src/custom/path/to/version.dart
+          # To add git branch name and commit id, default is false
+          gen_git_info: true
 ```

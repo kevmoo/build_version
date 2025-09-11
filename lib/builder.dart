@@ -8,19 +8,25 @@
 library;
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:build/build.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 
+import 'src/git_info.dart';
+
 const _defaultOutput = 'lib/src/version.dart';
 
-Builder buildVersion([BuilderOptions? options]) =>
-    _VersionBuilder((options?.config['output'] as String?) ?? _defaultOutput);
+Builder buildVersion([BuilderOptions? options]) => _VersionBuilder(
+  output: (options?.config['output'] as String?) ?? _defaultOutput,
+  genGitInfo: options?.config['gen_git_info'] as bool? ?? false,
+);
 
 class _VersionBuilder implements Builder {
   final String output;
+  final bool genGitInfo;
 
-  _VersionBuilder(this.output);
+  _VersionBuilder({required this.output, required this.genGitInfo});
 
   @override
   Future<void> build(BuildStep buildStep) async {
@@ -41,9 +47,11 @@ class _VersionBuilder implements Builder {
       throw StateError('pubspec.yaml does not have a version defined.');
     }
 
+    final gitInfoStr = await _buildGitInfoStr(Directory.current);
+
     await buildStep.writeAsString(buildStep.allowedOutputs.single, '''
 // Generated code. Do not modify.
-const packageVersion = '${pubspec.version}';
+const packageVersion = '${pubspec.version}';${gitInfoStr.isNotEmpty ? "\n\n" : ''}$gitInfoStr
 ''');
   }
 
@@ -51,4 +59,19 @@ const packageVersion = '${pubspec.version}';
   Map<String, List<String>> get buildExtensions => {
     'pubspec.yaml': [output],
   };
+
+  Future<String> _buildGitInfoStr(Directory dir) async {
+    if (!genGitInfo) {
+      return '';
+    }
+
+    try {
+      final gitInfo = await GitInfo.fromDir(dir);
+      return '''// git info
+const gitBranch = '${gitInfo?.branch ?? ''}';
+const gitCommitId = '${gitInfo?.commitId ?? ''}';''';
+    } catch (_) {}
+
+    return '';
+  }
 }

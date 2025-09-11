@@ -12,6 +12,7 @@ builders:
     build_extensions: {"pubspec.yaml": ["lib/src/version.dart"]}
     defaults:
       options:
-        output: "lib/src/version.dart"
+        output: "lib/gen/version.dart"
+        gen_git_info: true
     build_to: source
     auto_apply: dependents
