@@ -14,7 +14,7 @@ void main() {
       onLog: (log) => logs.add(log.message),
     );
 
-    expect(result.buildResult.failureType, isNotNull);
+    expect(result.succeeded, isFalse);
     expect(
       logs,
       contains(
@@ -30,7 +30,7 @@ void main() {
       onLog: (log) => logs.add(log.message),
     );
 
-    expect(result.buildResult.failureType, isNotNull);
+    expect(result.succeeded, isFalse);
     expect(
       logs,
       contains(
@@ -46,7 +46,7 @@ void main() {
       onLog: (log) => logs.add(log.message),
     );
 
-    expect(result.buildResult.failureType, isNotNull);
+    expect(result.succeeded, isFalse);
     expect(
       logs,
       contains(
