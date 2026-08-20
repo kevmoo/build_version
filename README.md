@@ -18,7 +18,7 @@ Include the version of your package in our source code.
 2. Run a build.
 
    ```console
-   > dart pub run build_runner build
+   > dart run build_runner build
    ```
 
    `lib/src/version.dart` will be generated with content:
