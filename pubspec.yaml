@@ -4,7 +4,7 @@ version: 2.1.4-wip
 repository: https://github.com/kevmoo/build_version
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.12.0
 
 dependencies:
   build: ^4.0.0
