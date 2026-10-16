@@ -1,6 +1,6 @@
 ## 2.1.4-wip
 
-- Require `sdk: ^3.9.0`
+- Require `sdk: ^3.12.0`
 - Require `build ^4.0.0`
 
 ## 2.1.3
