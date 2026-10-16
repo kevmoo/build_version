@@ -1,0 +1,7 @@
+environment:
+  sdk: ^3.9.0
+package:build_version/builder.dart:
+  buildVersion (function: Builder Function([BuilderOptions?]))
+package:build/src/builder.dart:
+  Builder (referenced)
+  BuilderOptions (referenced)
