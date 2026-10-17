@@ -8,8 +8,8 @@ const defaultOutput = 'lib/src/version.dart';
 
 const missingVersionMessage = 'pubspec.yaml does not have a version defined.';
 
-String caretVersionConstraint(String version) =>
-    '^${version.split(RegExp(r'[-+]')).first}';
+String baseReleaseVersion(String version) =>
+    version.split(RegExp(r'[-+]')).first;
 
 String? generateVersionContent(
   String pubspecContent, {
