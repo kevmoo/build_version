@@ -1,0 +1,140 @@
+// Copyright (c) 2018, build_version authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+import 'dart:io';
+
+import 'package:args/args.dart';
+
+import 'version_generator.dart';
+
+const _usageHeader = '''
+Usage: build_version [options]
+
+Generates a Dart constant with the package version from pubspec.yaml.''';
+
+ArgParser _createParser() => ArgParser()
+  ..addFlag(
+    'check',
+    abbr: 'c',
+    negatable: false,
+    help: 'Check that the output file matches pubspec.yaml without writing.',
+  )
+  ..addOption(
+    'output',
+    abbr: 'o',
+    defaultsTo: defaultOutput,
+    help: 'Output file path relative to the package root.',
+  )
+  ..addFlag(
+    'help',
+    abbr: 'h',
+    negatable: false,
+    help: 'Print this usage information.',
+  );
+
+String get usage => '$_usageHeader\n\n${_createParser().usage}';
+
+int runBuildVersion(
+  List<String> args, {
+  String? workingDirectory,
+  StringSink? out,
+  StringSink? err,
+}) {
+  final stdoutSink = out ?? stdout;
+  final stderrSink = err ?? stderr;
+  final parser = _createParser();
+
+  final ArgResults argResults;
+  try {
+    argResults = parser.parse(args);
+  } on FormatException catch (e) {
+    stderrSink
+      ..writeln(e.message)
+      ..writeln()
+      ..writeln(usage);
+    return 64;
+  }
+
+  if (argResults.flag('help')) {
+    stdoutSink.writeln(usage);
+    return 0;
+  }
+
+  if (argResults.rest.isNotEmpty) {
+    stderrSink
+      ..writeln('Unexpected positional arguments: ${argResults.rest.join(' ')}')
+      ..writeln()
+      ..writeln(usage);
+    return 64;
+  }
+
+  final outputOption = (argResults.option('output') ?? defaultOutput).trim();
+  if (outputOption.isEmpty) {
+    stderrSink
+      ..writeln('The --output option cannot be empty.')
+      ..writeln()
+      ..writeln(usage);
+    return 64;
+  }
+
+  final rootDir = Directory(workingDirectory ?? Directory.current.path);
+  final pubspecFile = File.fromUri(rootDir.uri.resolve('pubspec.yaml'));
+  if (!pubspecFile.existsSync()) {
+    stderrSink.writeln('Could not find pubspec.yaml in ${rootDir.path}.');
+    return 1;
+  }
+
+  final String? expectedContent;
+  try {
+    expectedContent = generateVersionContent(
+      pubspecFile.readAsStringSync(),
+      sourceUrl: pubspecFile.uri,
+    );
+  } on Exception catch (e) {
+    stderrSink.writeln(e);
+    return 1;
+  }
+  if (expectedContent == null) {
+    stderrSink.writeln(missingVersionMessage);
+    return 1;
+  }
+
+  final outputFile = File.fromUri(
+    rootDir.uri.resolveUri(Uri.file(outputOption, windows: Platform.isWindows)),
+  );
+
+  if (argResults.flag('check')) {
+    final error = _checkVersionFile(outputFile, outputOption, expectedContent);
+    if (error != null) {
+      stderrSink.writeln(error);
+      return 1;
+    }
+    return 0;
+  }
+
+  outputFile.parent.createSync(recursive: true);
+  outputFile.writeAsStringSync(expectedContent);
+  stdoutSink.writeln('Wrote $outputOption.');
+  return 0;
+}
+
+String? _checkVersionFile(
+  File outputFile,
+  String outputOption,
+  String expectedContent,
+) {
+  final remediation = outputOption == defaultOutput
+      ? 'dart run build_version'
+      : 'dart run build_version --output $outputOption';
+  if (!outputFile.existsSync()) {
+    return '$outputOption does not exist.\n'
+        'Run "$remediation" to generate it.';
+  }
+  final existing = outputFile.readAsStringSync().replaceAll('\r\n', '\n');
+  if (existing != expectedContent) {
+    return '$outputOption is out of date with pubspec.yaml.\n'
+        'Run "$remediation" to update it.';
+  }
+  return null;
+}

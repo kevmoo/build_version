@@ -2,23 +2,24 @@
 [![Pub Package](https://img.shields.io/pub/v/build_version.svg)](https://pub.dev/packages/build_version)
 [![package publisher](https://img.shields.io/pub/publisher/build_version.svg)](https://pub.dev/packages/build_version/publisher)
 
-Include the version of your package in our source code.
+Include the version of your package in your source code.
 
-1. Add `build_version` to `pubspec.yaml`. Also make sure there is a `version`
-   field.
+## Standalone CLI
+
+Run `build_version` directly with Dart 3.12+ without adding `build_runner` to
+your `dev_dependencies`.
+
+1. Make sure `pubspec.yaml` has a `version` field:
 
    ```yaml
    name: my_pkg
    version: 1.2.3
-   dev_dependencies:
-     build_runner: ^1.0.0
-     build_version: ^2.0.0
    ```
 
-2. Run a build.
+2. Generate `lib/src/version.dart`:
 
    ```console
-   > dart run build_runner build
+   $ dart run build_version@
    ```
 
    `lib/src/version.dart` will be generated with content:
@@ -28,10 +29,46 @@ Include the version of your package in our source code.
    const packageVersion = '1.2.3';
    ```
 
-To change the path of the generated file, create a
+3. Verify in CI that `lib/src/version.dart` matches `pubspec.yaml` without
+   modifying files on disk:
+
+   ```console
+   $ dart run build_version@ --check
+   ```
+
+To write or check a custom output path relative to the package root, pass
+`--output` (`-o`):
+
+```console
+$ dart run build_version@ --output lib/src/custom/path/to/version.dart
+$ dart run build_version@ --check --output lib/src/custom/path/to/version.dart
+```
+
+You can also add `build_version` to `dev_dependencies` and run
+`dart run build_version`.
+
+## With build_runner
+
+1. Add `build_version` and `build_runner` to `pubspec.yaml`. Also make sure
+   there is a `version` field.
+
+   ```yaml
+   name: my_pkg
+   version: 1.2.3
+   dev_dependencies:
+     build_runner: ^2.10.0
+     build_version: ^2.2.0
+   ```
+
+2. Run a build.
+
+   ```console
+   $ dart run build_runner build
+   ```
+
+To change the path of the generated file when using `build_runner`, create a
 [`build.yaml`](https://pub.dev/packages/build_config) in the root of your
-package. By changing the `output` option of this builder, the path can be
-customized:
+package and set the `output` option of this builder:
 
 ```yaml
 targets:
