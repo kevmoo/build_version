@@ -1,4 +1,6 @@
-## 2.2.1-wip
+## 2.2.1
+
+- Document standalone CLI vs `build_runner` trade-offs in `README.md`.
 
 ## 2.2.0
 
