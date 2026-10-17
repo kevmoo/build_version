@@ -1,5 +1,7 @@
-## 2.1.4-wip
+## 2.2.0
 
+- Add standalone `build_version` CLI executable (`--check` and `--output`) to
+  generate or verify `packageVersion` without `build_runner`.
 - Require `sdk: ^3.12.0`
 - Require `build ^4.0.0`
 
