@@ -1,3 +1,5 @@
+## 2.2.1-wip
+
 ## 2.2.0
 
 - Add standalone `build_version` CLI executable (`--check` and `--output`) to
