@@ -4,6 +4,16 @@
 
 Include the version of your package in your source code.
 
+`build_version` runs either as a standalone CLI or as a `build_runner` builder.
+
+| Feature                | Standalone CLI (`dart run build_version@`)                                             | With `build_runner`                                                 |
+| :--------------------- | :------------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
+| **Best when**          | `build_version` is your only code generator (or other generators also run standalone). | Your package already runs `build_runner` for other builders.        |
+| **`dev_dependencies`** | None required.                                                                         | `build_version` and `build_runner` (plus `build_verify` for tests). |
+| **Custom output path** | `--output <path>` (`-o`) CLI option.                                                   | `build.yaml` (`builders: build_version: options: output: <path>`).  |
+| **Generated header**   | Includes `dart run build_version@<version>` rerun comment.                             | Single-line `// Generated code. Do not modify.` header.             |
+| **CI verification**    | `dart run build_version@<version> --check`                                             | `package:build_verify` (`expectBuildClean()`)                       |
+
 ## Standalone CLI
 
 Run `build_version` directly with Dart 3.12+ without adding `build_runner` to

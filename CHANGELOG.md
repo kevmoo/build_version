@@ -1,3 +1,7 @@
+## 2.2.1
+
+- Document standalone CLI vs `build_runner` trade-offs in `README.md`.
+
 ## 2.2.0
 
 - Add standalone `build_version` CLI executable (`--check` and `--output`) to
