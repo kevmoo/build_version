@@ -1,3 +1,7 @@
+## 3.0.0-wip
+
+- **BREAKING**: Move `lib/builder.dart` to `lib/src/builder.dart`.
+
 ## 2.2.1
 
 - Document standalone CLI vs `build_runner` trade-offs in `README.md`.
