@@ -8,15 +8,20 @@ const defaultOutput = 'lib/src/version.dart';
 
 const missingVersionMessage = 'pubspec.yaml does not have a version defined.';
 
-String? generateVersionContent(String pubspecContent, {Uri? sourceUrl}) {
+String caretVersionConstraint(String version) =>
+    '^${version.split(RegExp(r'[-+]')).first}';
+
+String? generateVersionContent(
+  String pubspecContent, {
+  Uri? sourceUrl,
+  String header = '// Generated code. Do not modify.',
+}) {
   final pubspec = Pubspec.parse(pubspecContent, sourceUrl: sourceUrl);
   final version = pubspec.version;
   if (version == null) {
     return null;
   }
 
-  return '''
-// Generated code. Do not modify.
-const packageVersion = '$version';
-''';
+  return '$header\n'
+      "const packageVersion = '$version';\n";
 }
